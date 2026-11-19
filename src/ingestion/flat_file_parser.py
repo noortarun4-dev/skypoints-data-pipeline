@@ -49,7 +49,7 @@ def parse_flat_file(file_path: Path) -> list[dict[str, Any]]:
     records: list[dict[str, Any]] = []
     headers: list[str] = []
 
-    with open(file_path, "r", encoding="utf-8") as fh:
+    with open(file_path, "r", encoding="utf-8-sig") as fh:
         for line_num, raw_line in enumerate(fh, start=1):
             line = raw_line.strip()
             if not line:
@@ -84,3 +84,4 @@ def parse_flat_file(file_path: Path) -> list[dict[str, Any]]:
                 logger.warning("Skipping unknown record type '%s' at line %d", record_type, line_num)
 
     return records
+

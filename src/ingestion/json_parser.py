@@ -13,7 +13,7 @@ def parse_redemptions_json(file_path: Path) -> list[dict[str, Any]]:
     queryable transaction-level rows (deduplicated by txn_id).
     Supports both a single JSON object and a JSON array of member payloads.
     """
-    raw_data = json.loads(file_path.read_text(encoding="utf-8"))
+    raw_data = json.loads(file_path.read_text(encoding="utf-8-sig"))
     payloads = raw_data if isinstance(raw_data, list) else [raw_data]
 
     flattened: dict[str, dict[str, Any]] = {}
@@ -35,3 +35,4 @@ def parse_redemptions_json(file_path: Path) -> list[dict[str, Any]]:
 
     logger.info("Flattened %d redemption transactions from %s", len(flattened), file_path.name)
     return list(flattened.values())
+
